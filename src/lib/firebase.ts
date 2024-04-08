@@ -9,13 +9,13 @@ const useEmulator = () => import.meta.env.VITE_USE_FIREBASE_EMULATOR;
 export const setupFirebase = () => {
   try {
     firebaseApp = initializeApp({
-      apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
-      authDomain: import.meta.env.VITE_FIREBASE_AUTHDOMAIN,
-      databaseURL: import.meta.env.VITE_FIREBASE_DATABASEURL,
-      projectId: import.meta.env.VITE_FIREBASE_PROJECTID,
-      storageBucket: import.meta.env.VITE_FIREBASE_STORAGEBUCKET,
-      messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGINGSENDERID,
-      appId: import.meta.env.VITE_FIREBASE_APPID,
+      apiKey: "AIzaSyAzRKHCdPi8KNZfbGtsD_hBdxX0NXw14R0",
+      authDomain: "mindquest-eedcd.firebaseapp.com",
+      databaseURL: "https://mindquest-eedcd-default-rtdb.firebaseio.com/",
+      projectId: "mindquest-eedcd",
+      storageBucket: "mindquest-eedcd.appspot.com",
+      messagingSenderId: "389745298187",
+      appId: "1:389745298187:web:c4208ea768e4aae80e700e",
     });
   } catch (error) {
     console.error({error})
