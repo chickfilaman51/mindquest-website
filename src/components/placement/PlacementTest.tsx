@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 
 // @ts-ignore
 import { questions } from '~/constants/index.ts';
 
 
-const PlacementTest = () => {
+const PlacementTest = ({ selectedAnswers, setSelectedAnswers }: { selectedAnswers: any, setSelectedAnswers: Dispatch<SetStateAction<any>> }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<{ [questionIndex: number]: number }>({});
+  
 
   const handleAnswer = (answerIndex: number) => {
-    setSelectedAnswers(prev => ({ ...prev, [currentQuestionIndex]: answerIndex }));
+    setSelectedAnswers((prev: Record<string, any>) => ({ ...prev, [currentQuestionIndex]: answerIndex }));
+    console.log("Selected Answers:", selectedAnswers);
   };
 
   const handleLeftClick = () => {
@@ -26,12 +27,11 @@ const PlacementTest = () => {
   };
 
 
-
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <h2 className="text-2xl font-bold mb-4">{`Question ${currentQuestionIndex + 1}:`} <br /></h2>
       <h2 className="text-2xl font-bold mb-4">{questions[currentQuestionIndex].question}</h2>
-
+      
       <div>
         {Object.entries(questions[currentQuestionIndex]).slice(1, 5).map(([key, value], index) => {
           if (key.startsWith('answer')) {
@@ -66,7 +66,7 @@ const PlacementTest = () => {
       </Link>
     </div>
   );
+  
 };
 
-export const selectedAnswers: { [questionIndex: number]: number } = {};
 export default PlacementTest;

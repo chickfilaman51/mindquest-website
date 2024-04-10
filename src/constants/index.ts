@@ -154,30 +154,30 @@ export const questions = [
     },
   ]
 
-  export const correctAnswers: string[] = [
+  export const correctAnswers: number[] = [
     // 2nd grade math questions
-    "15", // Question 1
-    "4",  // Question 2
-    "18", // Question 3
-    "12", // Question 4
+    0, // Question 1 (Index of "15" in the options array)
+    1, // Question 2 (Index of "4" in the options array)
+    3, // Question 3 (Index of "18" in the options array)
+    1, // Question 4 (Index of "12" in the options array)
     // 3rd grade math questions
-    "12", // Question 5
-    "60", // Question 6
-    "49", // Question 7
-    "7",  // Question 8
+    1, // Question 5 (Index of "12" in the options array)
+    0, // Question 6 (Index of "60" in the options array)
+    3, // Question 7 (Index of "49" in the options array)
+    2, // Question 8 (Index of "7" in the options array)
     // 4th grade math questions
-    "534", // Question 9
-    "90",  // Question 10
-    "20",  // Question 11
-    "18",  // Question 12
+    0, // Question 9 (Index of "534" in the options array)
+    2, // Question 10 (Index of "90" in the options array)
+    0, // Question 11 (Index of "20" in the options array)
+    1, // Question 12 (Index of "18" in the options array)
     // 5th grade math questions
-    "27",   // Question 13
-    "11/12",// Question 14
-    "12",   // Question 15
-    "180 miles", // Question 16
+    3, // Question 13 (Index of "27" in the options array)
+    0, // Question 14 (Index of "11/12" in the options array)
+    0, // Question 15 (Index of "12" in the options array)
+    2, // Question 16 (Index of "180 miles" in the options array)
     // 6th grade math questions
-    "25",   // Question 17
-    "6",    // Question 18
-    "24 square units",  // Question 19
-    "2 cups"            // Question 20
+    3, // Question 17 (Index of "25" in the options array)
+    2, // Question 18 (Index of "6" in the options array)
+    0, // Question 19 (Index of "24 square units" in the options array)
+    0  // Question 20 (Index of "2 cups" in the options array)
 ];

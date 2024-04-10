@@ -21,6 +21,7 @@ function Layout() {
   const { state } = useAuthState();
   // Explicitly define the state type to include User or null
   const [user, setUser] = useState<User | null>(null);
+  
 
   useEffect(() => {
     if (!useAuth()) {
@@ -52,6 +53,8 @@ function Layout() {
 }
 
 export const Router = () => {
+  
+  
   return (
     <BrowserRouter>
       <InnerRouter />
@@ -60,6 +63,8 @@ export const Router = () => {
 };
 
 const InnerRouter = () => {
+  const [selectedAnswers, setSelectedAnswers] = useState<{ [questionIndex: number]: number }>({});
+
   const routes: RouteObject[] = [
     {
       path: '/',
@@ -75,11 +80,11 @@ const InnerRouter = () => {
         },
         {
           path: '/placementtest',
-          element: <PlacementTest />,
+          element: <PlacementTest selectedAnswers={selectedAnswers} setSelectedAnswers={setSelectedAnswers} />,
         },
         {
           path: '/placementresults',
-          element: <PlacementResults />,
+          element: <PlacementResults selectedAnswers={selectedAnswers} />,
         }
       ],
     },
