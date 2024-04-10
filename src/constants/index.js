@@ -1,0 +1,58 @@
+export const questions = [
+    {
+      "question": "What is 1+1?",
+      "answer1": "7",
+      "answer2": "2",
+      "answer3": "6",
+      "answer4": "22",
+      "answer5": "5",
+      "answer6": "11",
+    },
+    {
+        "question": "What is 7 x 8?",
+        "answer1": "7",
+        "answer2": "2",
+        "answer3": "56",
+        "answer4": "32",
+        "answer5": "1",
+        "answer6": "91",
+    },
+    {
+        "question": "What is 6 / 2?",
+        "answer1": "7",
+        "answer2": "3",
+        "answer3": "1",
+        "answer4": "12",
+        "answer5": "99",
+        "answer6": "11",
+    },
+    {
+        "question": "What is 72/30?",
+        "answer1": "2.4",
+        "answer2": "2000",
+        "answer3": "6222",
+        "answer4": "2220",
+        "answer5": "2160",
+        "answer6": "1211",
+
+    },
+    {
+        "question": "What is the square root of 144?",
+        "answer1": "1441440",
+        "answer2": "144",
+        "answer3": "12",
+        "answer4": "6",
+        "answer5": "2",
+        "answer6": "1",
+    },
+    {
+        "question": "What is 99 squared?",
+        "answer1": "1",
+        "answer2": "9801",
+        "answer3": "99",
+        "answer4": "33",
+        "answer5": "2",
+        "answer6": "9.9",
+    },
+  ];
+

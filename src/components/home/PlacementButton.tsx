@@ -1,17 +1,11 @@
+import { Link } from 'react-router-dom';
+
 type Props = {};
 
 export const PlacementButton = (props: Props) => {
-  const handleClick = () => {
-    
-  };
-
   return (
-    <button
-      onClick={handleClick}
-      type="button"
-      className="btn normal-case"
-    >
+    <Link to="/placementtest" className="btn normal-case">
       Start the Placement Test
-    </button>
+    </Link>
   );
 };
