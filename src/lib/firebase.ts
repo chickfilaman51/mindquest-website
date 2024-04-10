@@ -31,6 +31,7 @@ export const useAuth = () => {
   if (useEmulator()) {
     connectAuthEmulator(auth, 'http://localhost:9099');
   }
+  
   return auth;
 };
 
@@ -53,3 +54,5 @@ export const useStorage = () => {
   }
   return storage;
 };
+
+
