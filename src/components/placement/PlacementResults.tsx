@@ -1,27 +1,16 @@
 import React from 'react';
+import { questions, correctAnswers } from '~/constants/index';
+import { selectedAnswers } from './PlacementTest';
 
-type Question = {
-  question: string;
-  answer1: string;
-  answer2: string;
-  answer3: string;
-  answer4: string;
-};
 
-type Props = {
-  selectedAnswers: { [questionIndex: number]: number };
-  questions: Question[];
-  correctAnswers: number[];
-};
-
-const PlacementResults: React.FC<Props> = ({ selectedAnswers, questions, correctAnswers }) => {
+const PlacementResults = () => {
   const results: { [key: string]: number } = { correct: 0, incorrect: 0 };
-  console.log("hi");
+  console.log(correctAnswers[1]);
   questions.forEach((question, index) => {
     const selectedAnswer = selectedAnswers[index];
     const correctAnswerIndex = correctAnswers[index];
-    console.log(selectedAnswer, correctAnswerIndex);
-    if (selectedAnswer === correctAnswerIndex) {
+    console.log("selectedAnswer", selectedAnswer, "correctAnswerIndex", correctAnswerIndex);
+    if (1==1) {
       results['correct']++;
     } else {
       results['incorrect']++;

@@ -68,4 +68,5 @@ const PlacementTest = () => {
   );
 };
 
+export const selectedAnswers: { [questionIndex: number]: number } = {};
 export default PlacementTest;

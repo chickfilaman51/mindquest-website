@@ -79,7 +79,7 @@ const InnerRouter = () => {
         },
         {
           path: '/placementresults',
-          element: <PlacementResults selectedAnswers={{}} questions={[]} correctAnswers={[]} />,
+          element: <PlacementResults />,
         }
       ],
     },
