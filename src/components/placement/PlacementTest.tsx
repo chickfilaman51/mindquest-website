@@ -25,9 +25,7 @@ const PlacementTest = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log(selectedAnswers);
-  };
+
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
@@ -62,9 +60,10 @@ const PlacementTest = () => {
           Next
         </button>
       </div>
-      <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 my-4 px-4 rounded">
+
+      <Link to="/placementresults" className="btn bg-blue-500 hover:bg-blue-700 normal-case text-white font-bold">
         Submit
-      </button>
+      </Link>
     </div>
   );
 };

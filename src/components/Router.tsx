@@ -15,6 +15,7 @@ const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p
 const HomeScreen = lazy(() => import('~/components/home/Home'));
 const Page404Screen = lazy(() => import('~/components/home/404'));
 const PlacementTest = lazy(() => import('~/components/placement/PlacementTest'));
+const PlacementResults = lazy(() => import('~/components/placement/PlacementResults'));
 
 function Layout() {
   const { state } = useAuthState();
@@ -76,6 +77,10 @@ const InnerRouter = () => {
           path: '/placementtest',
           element: <PlacementTest />,
         },
+        {
+          path: '/placementresults',
+          element: <PlacementResults selectedAnswers={{}} questions={[]} correctAnswers={[]} />,
+        }
       ],
     },
   ];

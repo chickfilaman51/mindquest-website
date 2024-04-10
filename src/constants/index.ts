@@ -154,3 +154,30 @@ export const questions = [
     },
   ]
 
+  export const correctAnswers: string[] = [
+    // 2nd grade math questions
+    "15", // Question 1
+    "4",  // Question 2
+    "18", // Question 3
+    "12", // Question 4
+    // 3rd grade math questions
+    "12", // Question 5
+    "60", // Question 6
+    "49", // Question 7
+    "7",  // Question 8
+    // 4th grade math questions
+    "534", // Question 9
+    "90",  // Question 10
+    "20",  // Question 11
+    "18",  // Question 12
+    // 5th grade math questions
+    "27",   // Question 13
+    "11/12",// Question 14
+    "12",   // Question 15
+    "180 miles", // Question 16
+    // 6th grade math questions
+    "25",   // Question 17
+    "6",    // Question 18
+    "24 square units",  // Question 19
+    "2 cups"            // Question 20
+];
