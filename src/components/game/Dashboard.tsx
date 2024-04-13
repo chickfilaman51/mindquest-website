@@ -21,8 +21,16 @@ const Dashboard = () => {
     alert(`You clicked point ${index}`);
   };
 
+  const handleButtonClick = () => {
+    alert('You clicked the Test Out button');
+  };
+
   return (
     <div className="relative flex justify-center items-center h-screen bg-gray-100">
+      <div className="absolute top-0 left-0 right-0 h-24 flex justify-between items-center px-2 mx-auto mt-6 w-1/3 bg-white shadow-md">
+        <span className="text-lg font-bold">Start the <b>Final</b> Test: </span>
+        <button onClick={handleButtonClick} className="px-4 py-2 bg-blue-500 text-white rounded">Start</button>
+      </div>
       <svg className="absolute" width="300" height="700">
         <g transform="translate(50,150)">
           <path 
