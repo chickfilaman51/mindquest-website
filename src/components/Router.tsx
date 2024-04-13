@@ -8,6 +8,7 @@ import { getAuth, onAuthStateChanged, User } from 'firebase/auth'; // Import Use
 import { useAuth } from "~/lib/firebase";
 import { setupFirebase } from '~/lib/firebase';
 
+
 setupFirebase();
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
@@ -16,6 +17,7 @@ const HomeScreen = lazy(() => import('~/components/home/Home'));
 const Page404Screen = lazy(() => import('~/components/home/404'));
 const PlacementTest = lazy(() => import('~/components/placement/PlacementTest'));
 const PlacementResults = lazy(() => import('~/components/placement/PlacementResults'));
+const Dashboard = lazy(() => import('~/components/game/Dashboard'));
 
 function Layout() {
   const { state } = useAuthState();
@@ -85,6 +87,10 @@ const InnerRouter = () => {
         {
           path: '/placementresults',
           element: <PlacementResults selectedAnswers={selectedAnswers} />,
+        },
+        {
+          path: '/dashboard',
+          element: <Dashboard />,
         }
       ],
     },
