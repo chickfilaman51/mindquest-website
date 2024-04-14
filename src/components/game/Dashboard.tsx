@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { line, curveCardinal } from 'd3';
 import { grade } from '~/components/placement/PlacementResults';
+import { gradeLessons } from '~/constants';
 
 const Dashboard = () => {
   const curvePoints = [
@@ -28,28 +29,18 @@ const Dashboard = () => {
     alert('You clicked the Test Out button');
   };
 
-  
+  const currentGradeLessons = gradeLessons[grade];
 
   return (
     <div className="relative flex justify-center items-center h-screen bg-gray-100">
-      <div className="absolute top-0 left-10 flex flex-col items-end mr-8 mt-6">
-        <div className="bg-white p-4 shadow-md">
-          <span className="text-lg font-bold cursor-pointer mb-2">Grade Level: {grade}</span>
-        </div>
-      </div>
-      
+      {/* Code for displaying Test Out button */}
       <div className="absolute top-0 left-0 right-0 flex justify-center items-center h-24 px-2 mx-auto mt-6 w-1/3 bg-white shadow-md">
         <span className="text-lg font-bold mx-4">Start the <b>Final</b> Test: </span>
         <button onClick={handleButtonClick} className="px-4 py-2 bg-blue-500 text-white rounded">Start</button>
       </div>
-      
-      <div className="absolute top-0 right-10 flex flex-col items-end mr-8 mt-6">
-        <div className="bg-white p-4 shadow-md">
-          <span className="text-lg font-bold cursor-pointer mb-2">Percent completed: 0%</span>
-        </div>
-      </div>
 
-      <svg className="absolute" width="300" height="770">
+      {/* Code for displaying the curve and dots */}
+      <svg className="absolute" width="400" height="770">
         <g transform="translate(50,230)">
           <path 
             d={pathData ?? ''}
@@ -58,9 +49,13 @@ const Dashboard = () => {
             fill="transparent"
           />
           {curvePoints.map((point, index) => (
-            <a onClick={() => handleClick(index)} key={index}>
-              <circle cx={point.x} cy={point.y} r={24} fill="#00f" className="hover:fill-blue-800"/>
-            </a>
+            <g key={index}>
+              <a onClick={() => handleClick(index)}>
+                <circle cx={point.x} cy={point.y} r={24} fill="#00f" className="hover:fill-blue-800"/>
+              </a>
+              {/* Code for displaying labels next to dots */}
+              <text x={point.x + 30} y={point.y + 6} className="text-xs">{currentGradeLessons[index]}</text>
+            </g>
           ))}
         </g>
       </svg>
