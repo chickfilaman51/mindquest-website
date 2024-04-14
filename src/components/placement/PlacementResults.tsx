@@ -2,16 +2,17 @@ import React from 'react';
 import { questions, correctAnswers } from '~/constants/index';
 import { LearningButton } from './LearningButton';
 
+let grade = 6; // Declare grade outside of the function
+
 const PlacementResults = ({ selectedAnswers }: { selectedAnswers: any }) => {
   const results: { [key: string]: number } = { correct: 0, incorrect: 0 };
   console.log(selectedAnswers)
   let count = 0;
-  let grade = 6;
   questions.forEach((question, index) => {
     const selectedAnswer = selectedAnswers[index];
     const correctAnswerIndex = correctAnswers[index];
     console.log("selectedAnswer", selectedAnswer, "correctAnswerIndex", correctAnswerIndex);
-    if (selectedAnswer==correctAnswerIndex) {
+    if (selectedAnswer == correctAnswerIndex) {
       results['correct']++;
     } else {
       results['incorrect']++;
@@ -35,5 +36,5 @@ const PlacementResults = ({ selectedAnswers }: { selectedAnswers: any }) => {
     </div>
   );
 };
-
-export default PlacementResults;
+export { grade };
+export default PlacementResults; // Export PlacementResults and grade separately

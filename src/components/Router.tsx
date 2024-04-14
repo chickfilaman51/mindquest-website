@@ -8,7 +8,6 @@ import { getAuth, onAuthStateChanged, User } from 'firebase/auth'; // Import Use
 import { useAuth } from "~/lib/firebase";
 import { setupFirebase } from '~/lib/firebase';
 
-
 setupFirebase();
 
 const Loading = () => <p className="p-4 w-full h-full text-center">Loading...</p>;
