@@ -48,8 +48,8 @@ const Dashboard = () => {
       </div>
 
       {/* Code for displaying the curve and dots */}
-      <svg className="absolute" width="400" height="850" style={{ left: '50%', transform: 'translateX(-50%)' }}>
-        <g transform="translate(50,280)">
+      <svg className="absolute" width="600" height="850" style={{ left: '50%', transform: 'translateX(-50%)' }}>
+        <g transform="translate(180,280)">
           <path 
             d={pathData ?? ''}
             stroke="black"
