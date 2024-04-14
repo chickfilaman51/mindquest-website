@@ -32,16 +32,24 @@ const Dashboard = () => {
   const currentGradeLessons = gradeLessons[grade];
 
   return (
-    <div className="relative flex justify-center items-center h-screen bg-gray-100">
-      {/* Code for displaying Test Out button */}
-      <div className="absolute top-0 left-0 right-0 flex justify-center items-center h-24 px-2 mx-auto mt-6 w-1/3 bg-white shadow-md">
-        <span className="text-lg font-bold mx-4">Start the <b>Final</b> Test: </span>
-        <button onClick={handleButtonClick} className="px-4 py-2 bg-blue-500 text-white rounded">Start</button>
+    <div className="relative">
+      {/* Code for displaying grade level */}
+      <div className="absolute top-0 left-10 flex flex-col items-end mr-8 mt-6">
+        <div className="bg-white p-4 shadow-md">
+          <span className="text-lg font-bold cursor-pointer mb-2">Grade Level: {grade}</span>
+        </div>
+      </div>
+
+      {/* Code for displaying percentage completed */}
+      <div className="absolute top-0 right-10 flex flex-col items-end mr-8 mt-6">
+        <div className="bg-white p-4 shadow-md">
+          <span className="text-lg font-bold cursor-pointer mb-2">Percent completed: 0%</span>
+        </div>
       </div>
 
       {/* Code for displaying the curve and dots */}
-      <svg className="absolute" width="400" height="770">
-        <g transform="translate(50,230)">
+      <svg className="absolute" width="400" height="850" style={{ left: '50%', transform: 'translateX(-50%)' }}>
+        <g transform="translate(50,280)">
           <path 
             d={pathData ?? ''}
             stroke="black"
@@ -59,6 +67,12 @@ const Dashboard = () => {
           ))}
         </g>
       </svg>
+
+      {/* Code for displaying Test Out button */}
+      <div className="absolute top-0 left-0 right-0 flex justify-center items-center h-24 px-2 mx-auto mt-6 w-1/3 bg-white shadow-md">
+        <span className="text-lg font-bold mx-4">Start the <b>Final</b> Test: </span>
+        <button onClick={handleButtonClick} className="px-4 py-2 bg-blue-500 text-white rounded">Start</button>
+      </div>
     </div>
   );
 };
