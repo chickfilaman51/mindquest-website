@@ -181,40 +181,40 @@ export const questions = [
     0, // Question 19 (Index of "24 square units" in the options array)
     0  // Question 20 (Index of "2 cups" in the options array)
 ];
-export const gradeLessons: { [key: number]: string[] } = {
-  2: [
-    "Addition and Subtraction",
-    "Place Value",
-    "Introduction to Multiplication and Division",
-    "Measurement (Length, Weight, Capacity)",
-    "Introduction to Geometry (Shapes and Patterns)"
-  ],
-  3: [
-    "Multiplication and Division Mastery",
-    "Fractions",
-    "Measurement and Data",
-    "Geometry",
-    "Problem-Solving Strategies"
-  ],
-  4: [
-    "Multiplication and Division Mastery",
-    "Fractions and Decimals",
-    "Geometry",
-    "Measurement and Data",
-    "Multiplication, Division, and Factors"
-  ],
-  5: [
-    "Multiplication and Division",
-    "Fractions, Decimals, and Percentages",
-    "Geometry",
-    "Ratio and Proportion",
-    "Data Analysis and Probability"
-  ],
-  6: [
-    "Number Sense and Operations",
-    "Algebraic Concepts",
-    "Geometry",
-    "Ratio and Proportion",
-    "Data Analysis and Probability"
-  ]
-};
+  export const gradeLessons: { [key: number]: string[] } = {
+    2: [
+      "Addition and Subtraction",
+      "Place Value",
+      "Introduction to Multiplication and Division",
+      "Measurement (Length, Weight, Capacity)",
+      "Introduction to Geometry (Shapes and Patterns)"
+    ],
+    3: [
+      "Multiplication and Division Mastery",
+      "Fractions",
+      "Measurement and Data",
+      "Geometry",
+      "Problem-Solving Strategies"
+    ],
+    4: [
+      "Multiplication and Division Mastery",
+      "Fractions and Decimals",
+      "Geometry",
+      "Measurement and Data",
+      "Multiplication, Division, and Factors"
+    ],
+    5: [
+      "Multiplication and Division",
+      "Fractions, Decimals, and Percentages",
+      "Geometry",
+      "Ratio and Proportion",
+      "Data Analysis and Probability"
+    ],
+    6: [
+      "Number Sense and Operations",
+      "Algebraic Concepts",
+      "Geometry",
+      "Ratio and Proportion",
+      "Data Analysis and Probability"
+    ]
+  };

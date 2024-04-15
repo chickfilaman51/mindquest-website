@@ -10,7 +10,7 @@ export const setupFirebase = () => {
   try {
     firebaseApp = initializeApp({
       apiKey: "AIzaSyAzRKHCdPi8KNZfbGtsD_hBdxX0NXw14R0",
-      authDomain: "https://mindquestgame.vercel.app/",
+      authDomain: "mindquest-eedcd.firebaseapp.com",
       databaseURL: "https://mindquest-eedcd-default-rtdb.firebaseio.com/",
       projectId: "mindquest-eedcd",
       storageBucket: "mindquest-eedcd.appspot.com",
