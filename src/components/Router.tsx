@@ -17,7 +17,7 @@ const Page404Screen = lazy(() => import('~/components/home/404'));
 const PlacementTest = lazy(() => import('~/components/placement/PlacementTest'));
 const PlacementResults = lazy(() => import('~/components/placement/PlacementResults'));
 const Dashboard = lazy(() => import('~/components/game/Dashboard'));
-
+const Lesson = lazy(() => import('~/components/game/Lesson'));
 function Layout() {
   const { state } = useAuthState();
   // Explicitly define the state type to include User or null
@@ -90,7 +90,11 @@ const InnerRouter = () => {
         {
           path: '/dashboard',
           element: <Dashboard />,
-        }
+        },
+        {
+          path: '/lesson',
+          element: <Lesson />,
+        },
       ],
     },
   ];

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { line, curveCardinal } from 'd3';
 import { grade } from '~/components/placement/PlacementResults';
 import { gradeLessons } from '~/constants';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+
+let lessonIndex = 1;
 
 const Dashboard = () => {
   const curvePoints = [
@@ -20,12 +23,13 @@ const Dashboard = () => {
   const pathData = lineGenerator(curvePoints.map(point => [point.x, point.y]));
 
   const [showGradePopup, setShowGradePopup] = useState(false);
-
-  const handleClick = (index: number) => {
-    alert(`You clicked point ${index}`);
+  
+  const handleLessonClick = (index: number) => {
+    console.log(index);
+    lessonIndex = index;
   };
 
-  const handleButtonClick = () => {
+  const handleTestClick = () => {
     alert('You clicked the Test Out button');
   };
 
@@ -58,9 +62,10 @@ const Dashboard = () => {
           />
           {curvePoints.map((point, index) => (
             <g key={index}>
-              <a onClick={() => handleClick(index)}>
+              {/* Use Link to navigate to /lesson with the corresponding index */}
+              <Link to={`/lesson`} onClick={() => handleLessonClick(index)}>
                 <circle cx={point.x} cy={point.y} r={24} fill="#00f" className="hover:fill-blue-800"/>
-              </a>
+              </Link>
               {/* Code for displaying labels next to dots */}
               <text x={point.x + 30} y={point.y + 6} className="text-xs">{currentGradeLessons[index]}</text>
             </g>
@@ -71,10 +76,11 @@ const Dashboard = () => {
       {/* Code for displaying Test Out button */}
       <div className="absolute top-0 left-0 right-0 flex justify-center items-center h-24 px-2 mx-auto mt-6 w-1/3 bg-white shadow-md">
         <span className="text-lg font-bold mx-4">Start the <b>Final</b> Test: </span>
-        <button onClick={handleButtonClick} className="px-4 py-2 bg-blue-500 text-white rounded">Start</button>
+        <button onClick={handleTestClick} className="px-4 py-2 bg-blue-500 text-white rounded">Start</button>
       </div>
     </div>
   );
 };
 
 export default Dashboard;
+export { lessonIndex };
