@@ -4,6 +4,9 @@ import { gradeLessons } from '~/constants';
 import { grade } from '../placement/PlacementResults';
 // Import Link from react-router-dom
 import { Link } from 'react-router-dom';
+import { polygonSides } from '~/constants/questions';
+
+
 
 const Lesson = () => {
   return (

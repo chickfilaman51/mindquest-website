@@ -1,5 +1,91 @@
-function addSub(x, y, type) {
-    var problem = {};
+type Problem = {
+    question: string;
+    answer: any;
+    typedAnswer?: any;
+};
+
+export function getRandom(min:number, max:number) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+export function isPrime(n:number) {
+    var isPrime = true;
+    if (n < 2) {
+        isPrime = false;
+    }
+    for (var i = 2; i <= Math.sqrt(n); i++) {
+        if ((n % i) == 0) {
+            isPrime = false;
+        }
+    }
+    return isPrime;
+}
+
+export function letterPicker(n:number, capitalLetter:string) {
+    var capital = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','T','U','V','W','X','Y','Z');
+    var lowercase = new Array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','t','u','v','w','x','y','z');
+    if (n < 0) {
+        n = getRandom(0, capital.length - 1);
+    }
+    if (n >= capital.length) {
+        n %= capital.length;
+    }
+    if (capitalLetter) {
+        return capital[n];
+    } else {
+        return lowercase[n];
+    }
+}
+
+export function ordinal(n:number) {
+    var x = "";
+    if (n % 10 == 1 && n != 11) {
+        x += "st";
+    } else if (n % 10 == 2 && n != 12) {
+        x += "nd";
+    } else if (n % 10 == 3 && n != 13) {
+        x += "rd";
+    } else {
+        x += "th";
+    }
+    return x;
+}
+export function toss() {
+    if (Math.random() < 0.5) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+export function HCF(x: number, y:number) {
+    var temp;
+    if (x < 0) {
+        x *= -1;
+    }
+    if (y < 0) {
+        y *= -1;
+    }
+    if (x == y) {
+        return x;
+    }
+    while (x != 0) {
+        y = y % x;
+        temp = x;
+        x = y;
+        y = temp;
+    }
+    return y;
+}
+
+export function roundError(answer:number) {
+    return Math.round(answer * 1000000000) / 1000000000;
+}
+export function addSub(x: number, y:number, type: string) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     problem.question = "<div>\\(";
     switch (type) {
     case "+":
@@ -10,6 +96,7 @@ function addSub(x, y, type) {
         problem.question += x + " &minus; " + y;
         problem.answer = x - y;
         break;
+    }
     problem.question += "\\)</div>";
     problem.typedAnswer = roundError(problem.answer);
     problem.answer = "<div>\\(" + roundError(problem.answer) + "\\)</div>";
@@ -17,9 +104,12 @@ function addSub(x, y, type) {
 }
 
 
-function ordering(length, decimal, negative, descending, range) {
+export function ordering(length: number, decimal: number, negative: boolean, descending: boolean, range: any) {
     var list = new Array(length);
-    var problem = {};
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var sequence = "";
     for (var i = 0; i < list.length; i++) {
         list[i] = Math.floor(Math.random() * range);
@@ -59,8 +149,11 @@ function ordering(length, decimal, negative, descending, range) {
     return problem;
 }
 
-function multDiv(x, y, type) {
-    var problem = {};
+export function multDiv(x: number, y:number, type: string) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     problem.question = "<div>\\(";
     switch (type) {
     case "*":
@@ -79,15 +172,18 @@ function multDiv(x, y, type) {
 }
 
 
-function convertingMetricLength(m, from, to) {
-    var problem = {};
+export function convertingMetricLength(m: number, from: string | number, to: string | number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var unit = new Array("mm","cm","m","km");
     var cm = roundError(m * 100);
     var mm = roundError(cm * 10);
     var km = roundError(m / 1000);
     var value = new Array(mm,cm,m,km);
-    problem.question = "Convert " + value[from] + " " + unit[from] + " to " + unit[to];
-    switch (to) {
+    problem.question = "Convert " + value[from as number] + " " + unit[from as number] + " to " + unit[to as number];
+    switch (to as number) {
     case 0:
         problem.answer = mm;
         break;
@@ -101,19 +197,22 @@ function convertingMetricLength(m, from, to) {
         problem.answer = km;
         break;
     }
-    problem.answer += " " + unit[to];
+    problem.answer += " " + unit[Number(to)];
     return problem;
 }
 
-function convertingMetricWeight(kg, from, to) {
-    var problem = {};
+export function convertingMetricWeight(kg: number, from: string | number, to: string | number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var unit = new Array("mg","g","kg","tonnes");
     var g = roundError(kg * 1000);
     var mg = roundError(g * 1000);
     var tonnes = roundError(kg / 1000);
     var value = new Array(mg,g,kg,tonnes);
-    problem.question = "Convert " + value[from] + " " + unit[from] + " to " + unit[to];
-    switch (to) {
+    problem.question = "Convert " + value[from as number] + " " + unit[from as number] + " to " + unit[to as number];
+    switch (to as number) {
     case 0:
         problem.answer = mg;
         break;
@@ -127,18 +226,21 @@ function convertingMetricWeight(kg, from, to) {
         problem.answer = tonnes;
         break;
     }
-    problem.answer += " " + unit[to];
+    problem.answer += " " + unit[Number(to)];
     return problem;
 }
 
-function convertingMetricVolume(l, from, to) {
-    var problem = {};
+export function convertingMetricVolume(l: number, from: string | number, to: string | number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var unit = new Array("ml","cl","l");
     var cl = roundError(l * 100);
     var ml = roundError(cl * 10);
     var value = new Array(ml,cl,l);
-    problem.question = "Convert " + value[from] + " " + unit[from] + " to " + unit[to];
-    switch (to) {
+    problem.question = "Convert " + value[from as number] + " " + unit[from as number] + " to " + unit[to as number];
+    switch (to as number) {
     case 0:
         problem.answer = ml;
         break;
@@ -149,12 +251,15 @@ function convertingMetricVolume(l, from, to) {
         problem.answer = l;
         break;
     }
-    problem.answer += " " + unit[to];
+    problem.answer += " " + unit[to as number];
     return problem;
 }
 
-function polygonSides(maxPol) {
-    var problem = {};
+export function polygonSides(maxPol: number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var polygon = [];
     polygon.push({
         name: "a triangle",
@@ -296,6 +401,7 @@ function polygonSides(maxPol) {
         name: "a hectogon",
         sides: 100
     });
+    let temp: number;
     polygon.push({
         name: "a chiliagon",
         sides: 1000
@@ -314,10 +420,13 @@ function polygonSides(maxPol) {
     return problem;
 }
 
-function convertingTime(from, to, x) {
+export function convertingTime(from: number, to: number, x: number | number) {
     var units = ["seconds", "minutes", "hours", "days", "weeks"];
     var mutliplier = [1, 60, 60, 24, 7];
-    var problem = {};
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     problem.question = "Convert " + x + " " + units[from] + " to " + units[to];
     if (to > from) {
         for (var i = from + 1; i <= to; i++) {
@@ -333,8 +442,11 @@ function convertingTime(from, to, x) {
     return problem;
 }
 
-function equationsIfThen(type, a, b, rhs) {
-    var problem = {};
+export function equationsIfThen(type: any, a: string | number, b: string | number, rhs: string | number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var letter = "x";
     var e1 = "";
     var e2 = "";
@@ -343,54 +455,54 @@ function equationsIfThen(type, a, b, rhs) {
     case 0:
         e1 = a + letter + "=" + rhs;
         e2 = a + letter + "+" + b;
-        ans = rhs + b;
+        ans = Number(rhs) + Number(b);
         break;
     case 1:
         e1 = a + letter + "=" + rhs;
         e2 = a + letter + "-" + b;
-        ans = rhs - b;
+        ans = Number(rhs) - Number(b);
         break;
     case 2:
         var mults = [2, 10];
         var m = mults[getRandom(0, mults.length - 1)];
         e1 = a + letter + "=" + rhs;
-        e2 = m * a + letter;
-        ans = rhs * m;
+        e2 = (m * Number(a)) + letter;
+        var ans = Number(rhs) * m;
         break;
     case 3:
         e1 = a + letter + "=" + rhs;
-        e2 = a / 2 + letter;
-        ans = rhs / 2;
+        e2 = Number(a) / 2 + letter;
+        ans = Number(rhs) / 2;
         break;
     case 4:
         e1 = a + letter + "=" + rhs;
         e2 = a + "(" + letter + "+" + 1 + ")";
-        ans = rhs + a;
+        ans = Number(rhs) + Number(a);
         break;
     case 5:
         e1 = a + letter + "=" + rhs;
         e2 = a + "(" + letter + "-" + 1 + ")";
-        ans = rhs - a;
+        ans = Number(rhs) - Number(a);
         break;
     case 6:
         e1 = a + letter + "=" + rhs;
         e2 = -a + letter + "+" + b;
-        ans = -rhs + b;
+        ans = -Number(rhs) + Number(b);
         break;
     case 7:
         e1 = a + letter + "=" + rhs;
         e2 = -a + letter + "-" + b;
-        ans = -rhs - b;
+        ans = -rhs - Number(b);
         break;
     case 8:
         e1 = a + letter + "=" + rhs;
         e2 = -a + "(" + letter + "+" + 1 + ")";
-        ans = -rhs - a;
+        ans = -rhs - Number(a);
         break;
     case 9:
         e1 = a + letter + "=" + rhs;
         e2 = -a + "(" + letter + "-" + 1 + ")";
-        ans = -rhs + a;
+        ans = -Number(rhs) + Number(a);
         break;
     }
     var answer = e2 + "=" + ans;
@@ -401,26 +513,38 @@ function equationsIfThen(type, a, b, rhs) {
     return problem;
 }
 
-function fourOpsFractions(w1, n1, d1, w2, n2, d2, w3, n3, d3, o1, o2) {
-    var problem = {};
-    if (w1 === 0) {
-        w1 = "";
-    }
-    if (w2 === 0) {
-        w2 = "";
-    }
-    if (w3 === 0) {
-        w3 = "";
-    }
+export function fourOpsFractions(w1: string | number, n1: string | number, d1: string | number, w2: string | number, n2: string | number, d2: string | number, w3: string | number, n3: string | number, d3: string | number, o1: string, o2: string) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
+
+    w1 = w1 === 0 ? "" : Number(w1);
+    w2 = w2 === 0 ? "" : Number(w2);
+    w3 = w3 === 0 ? "" : Number(w3);
+
+
     var f1 = w1 + "\\frac{" + n1 + "}{" + d1 + "}";
     var f2 = w2 + "\\frac{" + n2 + "}{" + d2 + "}";
     var f3 = w3 + "\\frac{" + n3 + "}{" + d3 + "}";
-    n1 = w1 * d1 + n1;
-    n2 = w2 * d2 + n2;
-    n3 = w3 * d3 + n3;
+    n1 = Number(n1);
+    n2 = Number(n2);
+    n3 = Number(n3);
+    d1 = Number(d1);
+    w1 = Number(w1);
+    d1 = Number(d1);
+    w2 = Number(w2);
+    d2 = Number(d2);
+    w3 = Number(w3);
+    d3 = Number(d3);
+    n1 = w1 * d1 + Number(n1);
+    n2 = w2 * d2 + Number(n2);
+    n3 = w3 * d3 + Number(n3);
+    var num: number = 0, den: number = 0;
+
     if (o1 == "+") {
-        var num = n1 * d2 + n2 * d1;
-        var den = d1 * d2;
+        num = n1 * d2 + n2 * d1;
+        den = d1 * d2;
     } else if (o1 == "-") {
         num = n1 * d2 - n2 * d1;
         den = d1 * d2;
@@ -481,8 +605,11 @@ function fourOpsFractions(w1, n1, d1, w2, n2, d2, w3, n3, d3, o1, o2) {
     return problem;
 }
 
-function areaCircle(r, pi) {
-    var problem = {};
+export function areaCircle(r: string | number, pi: any) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var unit = "cm";
     if (toss()) {
         unit = "mm";
@@ -492,9 +619,9 @@ function areaCircle(r, pi) {
     }
     var area = "\\(";
     if (pi) {
-        area += r * r + "&pi;";
+        area += Number(r) * Number(r) + "&pi;";
     } else {
-        area += Math.round(10 * r * r * Math.PI) / 10;
+        area += Math.round(10 * Number(r) * Number(r) * Math.PI) / 10;
     }
     area += " \\text{ " + unit + "}^2 \\)";
     var max = 120;
@@ -520,8 +647,11 @@ function areaCircle(r, pi) {
 
 
 
-function factors(maxFactors, minNumber, maxNumber) {
-    var problem = {};
+export function factors(maxFactors: number, minNumber: any, maxNumber: number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var totalFactors = maxFactors + 1;
     while (totalFactors > maxFactors) {
         totalFactors = 1;
@@ -537,46 +667,60 @@ function factors(maxFactors, minNumber, maxNumber) {
             }
         }
     }
+    var answer = ""; // Initialize the 'answer' variable
+    var x = 0; // Assign a default value to 'x'
     problem.question = "<div>List all the factors of \\(" + x + "\\).</div>";
     problem.answer = "<div>\\(" + answer + "\\)</div>";
-    problem.typedTanswer = answer;
+    problem.typedAnswer = answer;
     return problem;
 }
 
-function multiples(multiple, x) {
-    var problem = {};
-    problem.question = "<div>Write down the \\(" + multiple + "\\)<sup>" + ordinal(multiple) + "</sup> multiple of \\(" + x + "\\).</div>";
-    problem.answer = x * multiple;
+export function multiples(multiple: string | number, x: string | number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
+    problem.question = "<div>Write down the \\(" + Number(multiple) + "\\)<sup>" + ordinal(Number(multiple)) + "</sup> multiple of \\(" + Number(x) + "\\).</div>";
+    problem.answer = Number(x) * Number(multiple);
     return problem;
 }
 
-function hcf(x, y, z) {
-    var problem = {};
+export function hcf(x: string, y: string, z: string) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     if (z) {
         problem.question = "Find the highest common factor of " + x + ", " + y + " and " + z + ".";
-        problem.answer = HCF(HCF(x, y), z);
+        problem.answer = HCF(HCF(Number(x), Number(y)), Number(z));
     } else {
         problem.question = "Find the highest common factor of " + x + " and " + y + ".";
-        problem.answer = HCF(x, y);
+        problem.answer = HCF(Number(x), Number(y));
     }
     return problem;
 }
 
-function lcm(x, y, z) {
-    var problem = {};
+export function lcm(x: string | number, y: string | number, z: string | number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     if (z) {
-        var temp = x * y / (HCF(x, y));
+        var temp = Number(x) * Number(y) / (HCF(Number(x), Number(y)));
         problem.question = "Find the lowest common multiple of " + x + ", " + y + " and " + z + ".";
-        problem.answer = temp * z / HCF(temp, z);
+        problem.answer = temp * Number(z) / HCF(temp, Number(z));
     } else {
         problem.question = "Find the lowest common multiple of " + x + " and " + y + ".";
-        problem.answer = x * y / (HCF(x, y));
+        problem.answer = Number(x) * Number(y) / (HCF(Number(x), Number(y)));
     }
     return problem;
 }
 
-function collectingTerms(letters, variables, coeff, mixed) {
-    var problem = {};
+export function collectingTerms(letters: string | any[], variables: any[], coeff: string | any[], mixed: any) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var totalTerms = coeff.length;
     problem.question = "<div>Simplify fully</div><div>\\(";
     for (var i = 0; i < totalTerms; i++) {
@@ -627,21 +771,24 @@ function collectingTerms(letters, variables, coeff, mixed) {
     return problem;
 }
 
-function convertFDP(type, num, den) {
-    var problem = {};
-    var decimal = "\\(" + roundError(num / den) + "\\)";
-    var percentage = "\\(" + roundError(num / den * 100) + "\\)";
-    num = roundError(num);
-    den = roundError(den);
-    var whole = Math.floor(num / den);
+export function convertFDP(type: any, num: string | number, den: string | number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
+    var decimal = "\\(" + roundError(Number(num) / Number(den)) + "\\)";
+    var percentage = "\\(" + roundError(Number(num) / Number(den) * 100) + "\\)";
+    num = roundError(Number(num));
+    den = roundError(Number(den));
+    var whole = Math.floor(Number(num) / Number(den));
     if (whole < 0) {
         whole++;
         if (whole != 0) {
-            num = Math.abs(num);
+            num = Math.abs(Number(num));
         }
     }
-    num = num % den;
-    var hcf = HCF(num, den);
+    num = Number(num) % Number(den);
+    var hcf = HCF(Number(num), Number(den));
     num /= hcf;
     den /= hcf;
     var fraction = "\\(";
@@ -694,8 +841,11 @@ function convertFDP(type, num, den) {
     return problem;
 }
 
-function circumferenceCircle(r, pi) {
-    var problem = {};
+export function circumferenceCircle(r: string | number, pi: any) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var unit = "cm";
     if (toss()) {
         unit = "mm";
@@ -705,9 +855,9 @@ function circumferenceCircle(r, pi) {
     }
     var circumference = "\\(";
     if (pi) {
-        circumference += 2 * r + "&pi;";
+        circumference += 2 * Number(r) + "&pi;";
     } else {
-        circumference += Math.round(10 * 2 * r * Math.PI) / 10;
+        circumference += Math.round(10 * 2 * Number(r) * Math.PI) / 10;
     }
     circumference += " \\text{ " + unit + "} \\)";
     var max = 120;
@@ -731,12 +881,15 @@ function circumferenceCircle(r, pi) {
     return problem;
 }
 
-function combiningRatios(max) {
-    var problem = {};
+export function combiningRatios(max: any) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var seed = getRandom(0, 30);
-    var x = letterPicker(seed);
-    var y = letterPicker(seed + 1);
-    var z = letterPicker(seed + 2);
+    var x = letterPicker(seed, "capitalLetter");
+    var y = letterPicker(seed + 1, "capitalLetter");
+    var z = letterPicker(seed + 2, "capitalLetter");
     var a = getRandom(1, max);
     var c = getRandom(1, max);
     do {
@@ -750,8 +903,11 @@ function combiningRatios(max) {
     return problem;
 }
 
-function simplifyingRatios(terms, maxPrime) {
-    var problem = {};
+export function simplifyingRatios(terms: any, maxPrime: any) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var simplifiedRatio = Array(terms);
     var ratio = new Array(terms);
     var multiplier = getRandom(2, maxPrime);
@@ -784,8 +940,11 @@ function simplifyingRatios(terms, maxPrime) {
 }
 
 
-function basicProbability(type) {
-    var problem = {};
+export function basicProbability(type: any) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     problem.question = "<div>";
     switch (type) {
     case 0:
@@ -838,6 +997,8 @@ function basicProbability(type) {
             outcomes = 2;
             break;
         }
+        var outcomes: number = 0;
+        var noun = ""; // Assign a default value to 'noun'
         problem.question += "A fair coin is flipped twice. What is the probability of getting " + noun + "?";
         problem.answer = "<sup>" + outcomes + "</sup>&frasl;<sub>4</sub>";
         problem.typedAnswer = outcomes + "/4";
@@ -847,8 +1008,11 @@ function basicProbability(type) {
     return problem;
 }
 
-function numberBonds(type, bond, x) {
-    var problem = {};
+export function numberBonds(type: any, bond: string | number, x: string | number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var data = "";
     switch (type) {
     case 0:
@@ -864,26 +1028,29 @@ function numberBonds(type, bond, x) {
         data = bond + " &minus; " + x + " = ?";
         break;
     case 4:
-        data = bond + " + " + x + "+? = " + 2 * bond;
+        data = bond + " + " + x + "+? = " + 2 * Number(bond);
         break;
     case 5:
-        data = bond + " + " + "? + " + x + " = " + 2 * bond;
+        data = bond + " + " + "? + " + x + " = " + 2 * Number(bond);
         break;
     case 6:
-        data = 2 * bond + " - " + "? = " + bond + "+" + x;
+        data = 2 * Number(bond) + " - " + "? = " + bond + "+" + x;
         break;
     case 7:
-        data = 2 * bond + " - " + x + " = " + bond + "+?";
+        data = 2 * Number(bond) + " - " + x + " = " + bond + "+?";
         break;
     }
     problem.question = "\\(" + data + "\\)";
-    problem.answer = "\\(" + roundError(bond - x) + "\\)";
-    problem.typedAnswer = roundError(bond - x);
+    problem.answer = "\\(" + roundError(Number(bond) - Number(x)) + "\\)";
+    problem.typedAnswer = roundError(Number(bond) - Number(x));
     return problem;
 }
 
-function twoStepEquations(type, x, y, answer, inequality) {
-    var problem = {};
+export function twoStepEquations(type: number, x: string | number, y: string | number, answer: string | number, inequality: any) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var letter = "x";
     var side1, side2;
     var symbol = "=";
@@ -909,42 +1076,42 @@ function twoStepEquations(type, x, y, answer, inequality) {
     switch (type) {
     case 0:
         side1 = x + letter + " + " + y;
-        side2 = answer * x + y;
+        side2 = Number(answer) * Number(x) + Number(y);
         break;
     case 1:
         side1 = x + letter + " - " + y;
-        side2 = answer * x - y;
+        side2 = Number(answer) * Number(x) - Number(y);
         break;
     case 2:
         side1 = y + " + " + x + letter;
-        side2 = answer * x + y;
+        side2 = Number(answer) * Number(x) + Number(y)
         break;
     case 3:
         side1 = "\\frac{" + letter + "}{" + x + "} + " + y;
-        side2 = answer / x + y;
+        side2 = Number(answer) / Number(x) - Number(y);
         break;
     case 4:
         side1 = "\\frac{" + letter + "}{" + x + "} - " + y;
-        side2 = answer / x - y;
+        side2 = Number(answer) / Number(x) - Number(y)
         break;
     case 5:
         side1 = y + " + \\frac{" + letter + "}{" + x + "}";
-        side2 = answer / x + y;
+        side2 = Number(answer) * Number(x) + Number(y)
         break;
     case 6:
         side1 = y + " - " + x + letter;
-        side2 = -(answer * x - y);
+        side2 = -(Number(answer) * Number(x) - Number(y));
         break;
     case 7:
         side1 = letter + "^" + x + " + " + y;
-        side2 = Math.pow(answer, x) + y;
+        side2 = Math.pow(Number(answer), Number(x)) + Number(y);
         break;
     case 8:
         side1 = letter + "^" + x + " - " + y;
-        side2 = Math.pow(answer, x) - y;
+        side2 = Math.pow(Number(answer), Number(x)) - Number(y);
         break;
     }
-    side2 = roundError(side2);
+    side2 = roundError(Number(side2));
     problem.question = "<div>Solve:</div><div>" + "\\(";
     if (Math.random() < 0.5 || inequality) {
         problem.question += side1 + " " + symbol + " " + side2;
@@ -952,7 +1119,7 @@ function twoStepEquations(type, x, y, answer, inequality) {
         problem.question += side2 + " " + symbol + " " + side1;
     }
     problem.question += "\\)</div>";
-    answer = roundError(answer);
+    answer = roundError(Number(answer));
     if (!inequality) {
         problem.answer = "\\(" + letter + " " + symbol + " " + answer + "\\)";
         problem.typedAnswer = letter + symbol + answer;
@@ -962,12 +1129,16 @@ function twoStepEquations(type, x, y, answer, inequality) {
     return problem;
 }
 
-function expectedFrequency(trials) {
-    var problem = {};
+export function expectedFrequency(trials: string | number) {
+    var problem: Problem = {
+        question: "",
+        answer: null
+    };
     var number = getRandom(1, 6);
     problem.question = "<div>";
     problem.question += "A fair six sided dice is rolled " + trials + " times. How many times would you expect to roll a " + number + "?";
-    problem.answer = Math.round(trials / 6);
+    problem.answer = Math.round(Number(trials) / 6);
     problem.question += "</div>";
     return problem;
 }
+
