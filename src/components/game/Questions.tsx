@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
-import { polygonSides } from '~/constants/questions';
+import { grade } from '../placement/PlacementResults';
+import { lessonIndex } from './Dashboard';
+import { gradeLessons } from '~/constants';
+import * as questions from '~/constants/questions';
+
 
 const Questions = () => {
-  const [currentQuestion, setCurrentQuestion] = useState(polygonSides(10));
+
+  const gradeTopicFunctionMap: { [key: number]: { [key: string]: () => {} } } = {
+    2: {
+      "Addition and Subtraction": () => questions.addSub(10, 10, "+"),
+      // Add other topics for grade 2 here
+    },
+    // Add other grades here
+  };
+
+  const currentGrade = grade;
+  const currentTopic = lessonIndex;
+  const currentFunction = gradeTopicFunctionMap[grade][gradeLessons[grade][lessonIndex]] as () => { question: string, answer: number };
+
+  const [currentQuestion, setCurrentQuestion] = useState<{ question: string, answer: number }>(currentFunction());
   const [userAnswer, setUserAnswer] = useState('');
   const [message, setMessage] = useState('');
 
@@ -14,7 +31,7 @@ const Questions = () => {
       setMessage('Wrong answer. Try again.');
     }
     setUserAnswer('');
-    setCurrentQuestion(polygonSides(10));
+    setCurrentQuestion(currentFunction());
   };
 
   return (
