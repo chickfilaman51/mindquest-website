@@ -3,32 +3,61 @@ import { grade } from '../placement/PlacementResults';
 import { lessonIndex } from './Dashboard';
 import { gradeLessons } from '~/constants';
 import * as questions from '~/constants/questions';
-
+import Latex from 'react-latex';
 
 const Questions = () => {
 
   const gradeTopicFunctionMap: { [key: number]: { [key: string]: () => {} } } = {
     2: {
-      "Addition and Subtraction": () => questions.addSub(10, 10, "+"),
-      // Add other topics for grade 2 here
+      "Addition and Subtraction": () => {
+        const num1 = Math.floor(Math.random() * 60) + 1;
+        const num2 = Math.floor(Math.random() * 60) + 1;
+        const operator = Math.random() < 0.5 ? "+" : "-";
+        return questions.addSub(num1, num2, operator);
+      },
+      "Place Value": () => {
+        return questions.ordering(6, false, false, Math.random() < 0.5 ? true : false, 20);
+      },
+      "Intro to Multiplication and Division": () => {
+        const num2 = Math.floor(Math.random() * 5) + 1;
+        const multiplier = Math.floor(Math.random() * 5) + 1;
+        const num1 = num2 * multiplier;
+        const operator = Math.random() < 0.5 ? "*" : "/";
+        return questions.multDiv(num1, num2, operator);
+      },
+      "Measurement (Length, Weight, Capacity)": () => {
+        const measurementFunctions = [
+          questions.convertingMetricLength,
+          questions.convertingMetricWeight,
+          questions.convertingMetricVolume
+        ];
+        const randomFunction = measurementFunctions[Math.floor(Math.random() * measurementFunctions.length)];
+        return randomFunction(Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 4), Math.floor(Math.random() * 4));
+      },
+      "Introduction to Geometry (Shapes and Patterns)": () => {
+        return questions.polygonSides(10);
+      }
+      
     },
     // Add other grades here
   };
 
   const currentGrade = grade;
   const currentTopic = lessonIndex;
-  const currentFunction = gradeTopicFunctionMap[grade][gradeLessons[grade][lessonIndex]] as () => { question: string, answer: number };
+  const currentFunction = gradeTopicFunctionMap[grade][gradeLessons[grade][lessonIndex]] as () => { question: string, answer: string };
 
-  const [currentQuestion, setCurrentQuestion] = useState<{ question: string, answer: number }>(currentFunction());
+  const [currentQuestion, setCurrentQuestion] = useState<{ question: string, answer: string }>(currentFunction());
   const [userAnswer, setUserAnswer] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (Number(userAnswer) === currentQuestion.answer) {
+    const correctAnswer = currentQuestion.answer;
+    if (userAnswer == correctAnswer) {
       setMessage('Correct!');
     } else {
       setMessage('Wrong answer. Try again.');
+      console.log(correctAnswer, userAnswer);
     }
     setUserAnswer('');
     setCurrentQuestion(currentFunction());
@@ -36,7 +65,9 @@ const Questions = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
-      <h2 className="text-2xl font-bold mb-4">{`Question: ${currentQuestion.question.replace(/<\/?[^>]+(>|$)/g, "")}`}</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        Question: {currentQuestion.question}
+      </h2>
       <form onSubmit={handleSubmit}>
         <input 
           type="text" 

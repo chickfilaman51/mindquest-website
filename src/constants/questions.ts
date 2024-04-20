@@ -86,25 +86,25 @@ export function addSub(x: number, y:number, type: string) {
         question: "",
         answer: null
     };
-    problem.question = "<div>\\(";
+    problem.question = "";
     switch (type) {
     case "+":
         problem.question += x + " + " + y;
         problem.answer = x + y;
         break;
     case "-":
-        problem.question += x + " &minus; " + y;
+        problem.question += x + " - " + y;
         problem.answer = x - y;
         break;
     }
-    problem.question += "\\)</div>";
+    problem.question += "";
     problem.typedAnswer = roundError(problem.answer);
-    problem.answer = "<div>\\(" + roundError(problem.answer) + "\\)</div>";
+    problem.answer = roundError(problem.answer);
     return problem;
 }
 
 
-export function ordering(length: number, decimal: number, negative: boolean, descending: boolean, range: any) {
+export function ordering(length: number, decimal: boolean, negative: boolean, descending: boolean, range: any) {
     var list = new Array(length);
     var problem: Problem = {
         question: "",
@@ -120,13 +120,13 @@ export function ordering(length: number, decimal: number, negative: boolean, des
             list[i] = -list[i];
         }
     }
-    problem.question = "<div>Write in ";
+    problem.question = "Write in ";
     if (descending) {
         problem.question += "descending";
     } else {
         problem.question += "ascending";
     }
-    problem.question += " order:</div><div>\\(";
+    problem.question += " order: ";
     for (i = 0; i < list.length - 1; i++) {
         problem.question += list[i] + ", ";
     }
@@ -144,8 +144,8 @@ export function ordering(length: number, decimal: number, negative: boolean, des
         sequence += list[i] + ", ";
     }
     sequence += list[i];
-    problem.question += "\\)</div>";
-    problem.answer = "<div>\\(" + list + "\\)</div>";
+    problem.question += "";
+    problem.answer = list.join(',');
     return problem;
 }
 
@@ -154,20 +154,20 @@ export function multDiv(x: number, y:number, type: string) {
         question: "",
         answer: null
     };
-    problem.question = "<div>\\(";
+    problem.question = "";
     switch (type) {
     case "*":
-        problem.question += x + "\\ &#215;\\ " + y;
+        problem.question += x + " x " + y;
         problem.answer = x * y;
         break;
     case "/":
-        problem.question += x + "\\ &divide;\\ " + y;
+        problem.question += x + " / " + y;
         problem.answer = x / y;
         break;
     }
-    problem.question += "\\)</div>";
+    problem.question += "";
     problem.typedAnswer = roundError(problem.answer);
-    problem.answer = "<div>\\(" + roundError(problem.answer) + "\\)</div>";
+    problem.answer = roundError(problem.answer);
     return problem;
 }
 
@@ -415,7 +415,7 @@ export function polygonSides(maxPol: number) {
         sides: 1000000
     });
     temp = getRandom(0, maxPol);
-    problem.question = "<div>How many sides does " + polygon[temp].name + " have?</div>";
+    problem.question = "How many sides does " + polygon[temp].name + " have?";
     problem.answer = polygon[temp].sides;
     return problem;
 }
