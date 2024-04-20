@@ -505,11 +505,11 @@ export function equationsIfThen(type: any, a: string | number, b: string | numbe
         ans = -Number(rhs) + Number(a);
         break;
     }
-    var answer = e2 + "=" + ans;
-    e2 += "=\\text{ }?";
-    problem.question = "<div>If \\(" + e1 + "\\),</div>";
-    problem.question += "<div>then \\(" + e2 + "\\)</div>";
-    problem.answer = "\\(" + answer + "\\)";
+    var answer = ans;
+    e2 += "";
+    problem.question = "If " + e1 + " ";
+    problem.question += "then what is " + e2;
+    problem.answer = answer;
     return problem;
 }
 

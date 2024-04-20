@@ -36,8 +36,35 @@ const Questions = () => {
       },
       "Introduction to Geometry (Shapes and Patterns)": () => {
         return questions.polygonSides(10);
+      }    
+    },
+    3: {
+      "Multiplication and Division (2-3 digits)": () => {
+        const num2 = Math.floor(Math.random() * 40) + 1;
+        const multiplier = Math.floor(Math.random() * 6) + 1;
+        const num1 = num2 * multiplier;
+        const operator = Math.random() < 0.5 ? "*" : "/";
+        return questions.multDiv(num1, num2, operator);
+      },
+      "Time": () => {
+        return questions.convertingTime(Math.floor(Math.random() * 5),Math.floor(Math.random() * 5), Math.floor(Math.random() * 100));
+      },
+      "Measurement and Data": () => {
+        const measurementFunctions = [
+          questions.convertingMetricLength,
+          questions.convertingMetricWeight,
+          questions.convertingMetricVolume
+        ];
+        const randomFunction = measurementFunctions[Math.floor(Math.random() * measurementFunctions.length)];
+        return randomFunction(Math.floor(Math.random() * 20) + 1, Math.floor(Math.random() * 4), Math.floor(Math.random() * 4));
+      },
+      "Geometry": () => {
+        return questions.polygonSides(20);
+      },
+      "Problem-Solving Strategies": () => {
+        return questions.equationsIfThen(Math.floor(Math.random() * 8),Math.floor(Math.random() * 10),Math.floor(Math.random() * 10),Math.floor(Math.random() * 40));
       }
-      
+
     },
     // Add other grades here
   };
