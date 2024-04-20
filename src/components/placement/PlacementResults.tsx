@@ -36,6 +36,6 @@ const PlacementResults = ({ selectedAnswers }: { selectedAnswers: any }) => {
     </div>
   );
 };
-grade = 3;
+grade = 6;
 export { grade };
 export default PlacementResults; // Export PlacementResults and grade separately

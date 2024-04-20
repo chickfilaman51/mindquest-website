@@ -524,9 +524,9 @@ export function fourOpsFractions(w1: string | number, n1: string | number, d1: s
     w3 = w3 === 0 ? "" : Number(w3);
 
 
-    var f1 = w1 + "\\frac{" + n1 + "}{" + d1 + "}";
-    var f2 = w2 + "\\frac{" + n2 + "}{" + d2 + "}";
-    var f3 = w3 + "\\frac{" + n3 + "}{" + d3 + "}";
+    var f1 = w1 + "(" + n1 + " / " + d1 + ")";
+    var f2 = w2 + "(" + n2 + " / " + d2 + ")";
+    var f3 = w3 + " + " + n3 + " / " + d3 + "";
     n1 = Number(n1);
     n2 = Number(n2);
     n3 = Number(n3);
@@ -542,16 +542,17 @@ export function fourOpsFractions(w1: string | number, n1: string | number, d1: s
     n3 = w3 * d3 + Number(n3);
     var num: number = 0, den: number = 0;
 
+    
     if (o1 == "+") {
         num = n1 * d2 + n2 * d1;
         den = d1 * d2;
     } else if (o1 == "-") {
         num = n1 * d2 - n2 * d1;
         den = d1 * d2;
-    } else if (o1 == "&#215;") {
+    } else if (o1 == "*") {
         num = n1 * n2;
         den = d1 * d2;
-    } else if (o1 == "&divide;") {
+    } else if (o1 == "/") {
         num = n1 * d2;
         den = d1 * n2;
     }
@@ -561,18 +562,18 @@ export function fourOpsFractions(w1: string | number, n1: string | number, d1: s
     } else if (o2 == "-") {
         num = num * d3 - n3 * den;
         den *= d3;
-    } else if (o2 == "&#215;") {
+    } else if (o2 == "*") {
         num = num * n3;
         den = den * d3;
-    } else if (o2 == "&divide;") {
+    } else if (o2 == "/") {
         num = num * d3;
         den = den * n3;
     }
-    problem.question = "\\( " + f1 + "\\ " + o1 + "\\ " + f2;
+    problem.question = f1 + " " + o1 + " " + f2;
     if (o2) {
-        problem.question += "\\ " + o2 + "\\ " + f3;
+        problem.question += " " + o2 + " " + f3;
     }
-    problem.question += "\\)";
+    problem.question += "";
     var whole = Math.floor(num / den);
     if (whole < 0) {
         whole++;
@@ -584,7 +585,7 @@ export function fourOpsFractions(w1: string | number, n1: string | number, d1: s
     var hcf = HCF(num, den);
     num /= hcf;
     den /= hcf;
-    problem.answer = "\\(";
+    problem.answer = "";
     problem.typedAnswer = "";
     if (whole != 0) {
         problem.answer += whole;
@@ -594,14 +595,14 @@ export function fourOpsFractions(w1: string | number, n1: string | number, d1: s
         problem.typedAnswer += " ";
     }
     if (num != 0) {
-        problem.answer += "\\frac{" + num + "}{" + den + "}";
+        problem.answer += ""+num + "/" + den + "";
         problem.typedAnswer += num + "/" + den;
     }
     if (whole == 0 && num == 0) {
         problem.answer += "0";
         problem.typedAnswer = "0";
     }
-    problem.answer += "\\)";
+
     return problem;
 }
 
@@ -617,27 +618,22 @@ export function areaCircle(r: string | number, pi: any) {
     if (toss()) {
         unit = "m";
     }
-    var area = "\\(";
+    var area = "";
     if (pi) {
-        area += Number(r) * Number(r) + "&pi;";
+        area += Number(r) * Number(r) + "pi";
     } else {
         area += Math.round(10 * Number(r) * Number(r) * Math.PI) / 10;
     }
-    area += " \\text{ " + unit + "}^2 \\)";
+    area += " " + unit + "^2";
     var max = 120;
     var radius = getRandom(max / 2 - 10, max / 2);
     var angle = Math.PI / 2 * getRandom(0, 3);
     var x2 = Math.cos(angle) * radius;
     var y2 = Math.sin(angle) * radius;
-    problem.question = "<div>Find the area of this circle.</div>";
-    problem.question += "<svg width='" + max + "' height='" + max + "'>";
-    problem.question += "<circle cx='" + max / 2 + "' cy='" + max / 2 + "' r='" + radius + "' stroke='black' fill='#ffffff' />";
-    problem.question += "<circle cx='" + max / 2 + "' cy='" + max / 2 + "' r='" + 1 + "' stroke='black' fill='#000000' />";
-    problem.question += "<line x1='" + max / 2 + "' y1='" + max / 2 + "' x2='" + (max / 2 + x2) + "' y2='" + (max / 2 + y2) + "' stroke='black' />";
-    problem.question += "<text x='" + (max / 2) + "' y='" + (max / 2 + y2 / 2 - 5) + "' font-size='0.7em' fill='#000000'>" + r + " " + unit + "</text>";
-    problem.question += "</svg>";
+    problem.question = "Find the area of a circle with radius " + r + " " + unit + ".";
+    
     if (pi) {
-        problem.question += "<div>Give your answer in terms of \\(\\pi\\).</div>";
+        problem.question += " Give your answer in terms of pi.";
     } else {
         problem.question += "<div>Round your answer to 1d.p.</div>";
     }
@@ -647,16 +643,18 @@ export function areaCircle(r: string | number, pi: any) {
 
 
 
-export function factors(maxFactors: number, minNumber: any, maxNumber: number) {
+export function factors(maxFactors: number, minNumber: number, maxNumber: number) {
     var problem: Problem = {
         question: "",
         answer: null
     };
+    var answer = ""; // Initialize the 'answer' variable
+    var x = 0; // Assign a default value to 'x'
     var totalFactors = maxFactors + 1;
     while (totalFactors > maxFactors) {
         totalFactors = 1;
-        var answer = "1";
-        var x = getRandom(minNumber, maxNumber);
+        answer = "1";
+        x = getRandom(minNumber, maxNumber);
         if (x % 2 === 1 && Math.random() < 0.5 && x < maxNumber) {
             x++;
         }
@@ -667,25 +665,26 @@ export function factors(maxFactors: number, minNumber: any, maxNumber: number) {
             }
         }
     }
-    var answer = ""; // Initialize the 'answer' variable
-    var x = 0; // Assign a default value to 'x'
-    problem.question = "<div>List all the factors of \\(" + x + "\\).</div>";
-    problem.answer = "<div>\\(" + answer + "\\)</div>";
+    
+    problem.question = "List all the factors of " + x + ".";
+    problem.answer = answer;
     problem.typedAnswer = answer;
     return problem;
 }
 
-export function multiples(multiple: string | number, x: string | number) {
+
+
+export function multiples(multiple: number, x: number) {
     var problem: Problem = {
         question: "",
         answer: null
     };
-    problem.question = "<div>Write down the \\(" + Number(multiple) + "\\)<sup>" + ordinal(Number(multiple)) + "</sup> multiple of \\(" + Number(x) + "\\).</div>";
+    problem.question = "Write down the " + Number(multiple)  + ordinal(Number(multiple)) + " multiple of " + Number(x) + ".";
     problem.answer = Number(x) * Number(multiple);
     return problem;
 }
 
-export function hcf(x: string, y: string, z: string) {
+export function hcf(x: number, y: number, z: number) {
     var problem: Problem = {
         question: "",
         answer: null
@@ -700,7 +699,7 @@ export function hcf(x: string, y: string, z: string) {
     return problem;
 }
 
-export function lcm(x: string | number, y: string | number, z: string | number) {
+export function lcm(x: number, y: number, z: number) {
     var problem: Problem = {
         question: "",
         answer: null
@@ -722,7 +721,7 @@ export function collectingTerms(letters: string | any[], variables: any[], coeff
         answer: null
     };
     var totalTerms = coeff.length;
-    problem.question = "<div>Simplify fully</div><div>\\(";
+    problem.question = "Simplify fully: ";
     for (var i = 0; i < totalTerms; i++) {
         if (coeff[i] > 0 && i > 0) {
             problem.question += " + ";
@@ -737,7 +736,7 @@ export function collectingTerms(letters: string | any[], variables: any[], coeff
             problem.question += variables[i];
         }
     }
-    problem.question += "\\)</div>";
+    problem.question += "";
     var collected = new Array();
     for (i = 0; i < letters.length; i++) {
         var count = 0;
@@ -751,10 +750,10 @@ export function collectingTerms(letters: string | any[], variables: any[], coeff
     var answer = "";
     for (i = 0; i < letters.length; i++) {
         if (collected[i] > 0 && i > 0) {
-            answer += " + ";
+            answer += "+";
         }
         if (collected[i] < 0) {
-            answer += " - ";
+            answer += "-";
         }
         if (Math.abs(collected[i]) > 1) {
             answer += Math.abs(collected[i]);
@@ -767,7 +766,7 @@ export function collectingTerms(letters: string | any[], variables: any[], coeff
         answer = "0";
     }
     problem.typedAnswer = answer;
-    problem.answer = "\\(" + answer + "\\)";
+    problem.answer = answer;
     return problem;
 }
 
@@ -776,8 +775,8 @@ export function convertFDP(type: any, num: string | number, den: string | number
         question: "",
         answer: null
     };
-    var decimal = "\\(" + roundError(Number(num) / Number(den)) + "\\)";
-    var percentage = "\\(" + roundError(Number(num) / Number(den) * 100) + "\\)";
+    var decimal = "" + roundError(Number(num) / Number(den)) + "";
+    var percentage = "" + roundError(Number(num) / Number(den) * 100) + "";
     num = roundError(Number(num));
     den = roundError(Number(den));
     var whole = Math.floor(Number(num) / Number(den));
@@ -791,7 +790,7 @@ export function convertFDP(type: any, num: string | number, den: string | number
     var hcf = HCF(Number(num), Number(den));
     num /= hcf;
     den /= hcf;
-    var fraction = "\\(";
+    var fraction = "";
     var typedFraction = "";
     if (whole != 0) {
         fraction += whole;
@@ -801,14 +800,14 @@ export function convertFDP(type: any, num: string | number, den: string | number
         typedFraction += " ";
     }
     if (num != 0) {
-        fraction += "\\frac{" + num + "}{" + den + "}";
+        fraction += "" + num + "/" + den + "";
         typedFraction += num + "/" + den;
     }
     if (whole == 0 && num == 0) {
         fraction += "0";
         typedFraction = "0";
     }
-    fraction += "\\)";
+    fraction += "";
     problem.question = "Write ";
     switch (type) {
     case "PD":
@@ -853,27 +852,21 @@ export function circumferenceCircle(r: string | number, pi: any) {
     if (toss()) {
         unit = "m";
     }
-    var circumference = "\\(";
+    var circumference = "";
     if (pi) {
-        circumference += 2 * Number(r) + "&pi;";
+        circumference += 2 * Number(r) + "pi";
     } else {
         circumference += Math.round(10 * 2 * Number(r) * Math.PI) / 10;
     }
-    circumference += " \\text{ " + unit + "} \\)";
+    circumference += " " + unit + "";
     var max = 120;
     var radius = getRandom(max / 2 - 10, max / 2);
     var angle = 0;
     var x2 = Math.cos(angle) * radius;
     var y2 = Math.sin(angle) * radius;
-    problem.question = "<div>Find the circumference of this circle.</div>";
-    problem.question += "<svg width='" + max + "' height='" + max + "'>";
-    problem.question += "<circle cx='" + max / 2 + "' cy='" + max / 2 + "' r='" + radius + "' stroke='black' fill='#ffffff' />";
-    problem.question += "<circle cx='" + max / 2 + "' cy='" + max / 2 + "' r='" + 1 + "' stroke='black' fill='#000000' />";
-    problem.question += "<line x1='" + max / 2 + "' y1='" + max / 2 + "' x2='" + (max / 2 + x2) + "' y2='" + (max / 2 + y2) + "' stroke='black' />";
-    problem.question += "<text x='" + (max / 2) + "' y='" + (max / 2 + y2 / 2 - 5) + "' font-size='0.7em' fill='#000000'>" + r + " " + unit + "</text>";
-    problem.question += "</svg>";
+    problem.question = "Find the circumference of a circle with radius " + r + " " + unit + ". ";
     if (pi) {
-        problem.question += "<div>Give your answer in terms of \\(\\pi\\).</div>";
+        problem.question += "Give your answer in terms of pi.";
     } else {
         problem.question += "<div>Round your answer to 1d.p.</div>";
     }
@@ -896,8 +889,8 @@ export function combiningRatios(max: any) {
         var b = getRandom(1, max);
         var d = getRandom(1, max);
     } while (a === b || c === d);
-    problem.question = "<div>The ratio of " + x + " to " + y + " is " + a + " : " + b + ".<br>The ratio of " + y + " to " + z + " is " + c + " : " + d + ".</div>";
-    problem.question += "<div>Find the ratio " + x + " : " + y + " : " + z + " in its simplest form.</div>";
+    problem.question = "The ratio of " + x + " to " + y + " is " + a + " : " + b + ". The ratio of " + y + " to " + z + " is " + c + " : " + d + ".";
+    problem.question += " Find the ratio " + x + " : " + y + " : " + z + " in its simplest form.";
     var hcf = HCF(HCF(a * c, b * c), b * d);
     problem.answer = a * c / hcf + " : " + b * c / hcf + " : " + b * d / hcf;
     return problem;
@@ -925,17 +918,17 @@ export function simplifyingRatios(terms: any, maxPrime: any) {
         }
         ratio[1] = simplifiedRatio[1] * multiplier;
     }
-    problem.question = "<div>Simplify fully</div><div>\\(";
-    problem.answer = "<div>\\(";
+    problem.question = "Simplify fully: ";
+    problem.answer = "";
     problem.typedAnswer = "";
     for (i = 0; i < ratio.length - 1; i++) {
         problem.question += ratio[i] + ":";
         problem.typedAnswer += simplifiedRatio[i] + ":";
         problem.answer += simplifiedRatio[i] + ":";
     }
-    problem.question += ratio[i] + "\\)</div>";
+    problem.question += ratio[i] + "";
     problem.typedAnswer += simplifiedRatio[i];
-    problem.answer += simplifiedRatio[i] + "\\)</div>";
+    problem.answer += simplifiedRatio[i] + "";
     return problem;
 }
 
@@ -945,7 +938,7 @@ export function basicProbability(type: any) {
         question: "",
         answer: null
     };
-    problem.question = "<div>";
+    problem.question = "";
     switch (type) {
     case 0:
         var side = "heads";
@@ -953,12 +946,12 @@ export function basicProbability(type: any) {
             side = "tails";
         }
         problem.question += "A fair coin is flipped. What is the probability of getting " + side + "?";
-        problem.answer = "<sup>1</sup>&frasl;<sub>2</sub>";
+        problem.answer = "1/2";
         problem.typedAnswer = "1/2";
         break;
     case 1:
         problem.question += "A fair six sided dice is rolled. What is the probability of rolling a " + getRandom(1, 6) + "?";
-        problem.answer = "<sup>1</sup>&frasl;<sub>6</sub>";
+        problem.answer = "1/6";
         problem.typedAnswer = "1/6";
         break;
     case 2:
@@ -971,7 +964,7 @@ export function basicProbability(type: any) {
             outcomes = sides - number;
         }
         problem.question += "A fair " + sides + " sided spinner labelled 1 to " + sides + " is spun. What is the probability of spinning a number " + noun + " than " + number + "?";
-        problem.answer = "<sup>" + outcomes + "</sup>&frasl;<sub>" + sides + "</sub>";
+        problem.answer = outcomes + "/" + sides;
         problem.typedAnswer = outcomes + "/" + sides;
         break;
     case 3:
@@ -1000,11 +993,11 @@ export function basicProbability(type: any) {
         var outcomes: number = 0;
         var noun = ""; // Assign a default value to 'noun'
         problem.question += "A fair coin is flipped twice. What is the probability of getting " + noun + "?";
-        problem.answer = "<sup>" + outcomes + "</sup>&frasl;<sub>4</sub>";
+        problem.answer = outcomes + "/4";
         problem.typedAnswer = outcomes + "/4";
         break;
     }
-    problem.question += "</div>";
+    problem.question += "";
     return problem;
 }
 
@@ -1057,16 +1050,16 @@ export function twoStepEquations(type: number, x: string | number, y: string | n
     if (inequality) {
         switch (getRandom(0, 3)) {
         case 0:
-            symbol = "&lt;";
+            symbol = "<";
             break;
         case 1:
-            symbol = "&le;";
+            symbol = ">";
             break;
         case 2:
-            symbol = "&gt;";
+            symbol = "≤";
             break;
         case 3:
-            symbol = "&ge;";
+            symbol = "≥";
             break;
         }
         if (type > 6) {
@@ -1087,16 +1080,16 @@ export function twoStepEquations(type: number, x: string | number, y: string | n
         side2 = Number(answer) * Number(x) + Number(y)
         break;
     case 3:
-        side1 = "\\frac{" + letter + "}{" + x + "} + " + y;
+        side1 = letter + "/" + x + " + " + y;
         side2 = Number(answer) / Number(x) - Number(y);
         break;
     case 4:
-        side1 = "\\frac{" + letter + "}{" + x + "} - " + y;
-        side2 = Number(answer) / Number(x) - Number(y)
+        side1 = letter + "/" + x + " - " + y;
+        side2 = Number(answer) / Number(x) - Number(y);
         break;
     case 5:
-        side1 = y + " + \\frac{" + letter + "}{" + x + "}";
-        side2 = Number(answer) * Number(x) + Number(y)
+        side1 = y + " + " + letter + "/" + x;
+        side2 = Number(answer) * Number(x) + Number(y);
         break;
     case 6:
         side1 = y + " - " + x + letter;
@@ -1112,19 +1105,19 @@ export function twoStepEquations(type: number, x: string | number, y: string | n
         break;
     }
     side2 = roundError(Number(side2));
-    problem.question = "<div>Solve:</div><div>" + "\\(";
+    problem.question = "Solve for x: " + "";
     if (Math.random() < 0.5 || inequality) {
         problem.question += side1 + " " + symbol + " " + side2;
     } else {
         problem.question += side2 + " " + symbol + " " + side1;
     }
-    problem.question += "\\)</div>";
+    problem.question += "";
     answer = roundError(Number(answer));
     if (!inequality) {
-        problem.answer = "\\(" + letter + " " + symbol + " " + answer + "\\)";
+        problem.answer = letter + symbol + answer;
         problem.typedAnswer = letter + symbol + answer;
     } else {
-        problem.answer = "\\(" + answer + "\\)";
+        problem.answer = letter + symbol + answer;
     }
     return problem;
 }
@@ -1135,10 +1128,10 @@ export function expectedFrequency(trials: string | number) {
         answer: null
     };
     var number = getRandom(1, 6);
-    problem.question = "<div>";
+    problem.question = "";
     problem.question += "A fair six sided dice is rolled " + trials + " times. How many times would you expect to roll a " + number + "?";
     problem.answer = Math.round(Number(trials) / 6);
-    problem.question += "</div>";
+    problem.question += "";
     return problem;
 }
 
