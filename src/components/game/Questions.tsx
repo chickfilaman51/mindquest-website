@@ -295,7 +295,7 @@ const Questions = () => {
       </form>
       <p>{message}</p>
       <p>You have answered {correctCount} questions correctly in a row.</p>
-      {correctCount >= 1 && (
+      {correctCount >= 5 && (
         <div className='text-green-500 font-bold mt-9 flex flex-col items-center justify-center'>
           <p>You have completed the lesson! Congratulations!</p>
           <button onClick={() => handleCompletion(lessonIndex)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
