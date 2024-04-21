@@ -4,6 +4,7 @@ import { lessonIndex } from './Dashboard';
 import { gradeLessons } from '~/constants';
 import * as questions from '~/constants/questions';
 import Latex from 'react-latex';
+import { useNavigate } from 'react-router-dom';
 
 const Questions = () => {
 
@@ -237,19 +238,42 @@ const Questions = () => {
   const [currentQuestion, setCurrentQuestion] = useState<{ question: string, answer: string }>(currentFunction());
   const [userAnswer, setUserAnswer] = useState('');
   const [message, setMessage] = useState('');
+  const [correctCount, setCorrectCount] = useState(0);
+
+  const handleCorrectAnswer = () => {
+    setCorrectCount(prevCount => prevCount + 1);
+    setMessage('Correct!');
+  };
+
+  const handleIncorrectAnswer = () => {
+    setCorrectCount(prevCount => 0);
+    setMessage('Wrong answer. Try again.');
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const correctAnswer = currentQuestion.answer;
     if (userAnswer == correctAnswer) {
-      setMessage('Correct!');
+      handleCorrectAnswer();
     } else {
-      setMessage('Wrong answer. Try again.');
-      console.log(correctAnswer, userAnswer);
+      console.log(userAnswer, correctAnswer);
+      handleIncorrectAnswer();
     }
     setUserAnswer('');
     setCurrentQuestion(currentFunction());
   };
+
+  const navigate = useNavigate();
+
+  const handleCompletion = (lessonIndex: number) => {
+    let completedLessons: any[] = JSON.parse(localStorage.getItem('completedLessons') || "[]");
+    if (!completedLessons.includes(lessonIndex)) {
+      completedLessons.push(lessonIndex);
+    }
+    localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
+    navigate('/dashboard');
+  };
+
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
@@ -268,6 +292,15 @@ const Questions = () => {
         </button>
       </form>
       <p>{message}</p>
+      <p>You have answered {correctCount} questions correctly in a row.</p>
+      {correctCount >= 1 && (
+        <div className='text-green-500 font-bold mt-9 flex flex-col items-center justify-center'>
+          <p>You have completed the lesson! Congratulations!</p>
+          <button onClick={() => handleCompletion(lessonIndex)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+            Exit Lesson
+          </button>
+        </div>
+      )}
     </div>
   );
 };
