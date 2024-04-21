@@ -18,8 +18,15 @@ module.exports = {
       '160': '40rem',
       '200': '50rem',
     }
+    
   },
-  variants: {},
+  variants: {
+    extend: {
+      backgroundColor: ['high-contrast'],
+      textColor: ['high-contrast'],
+      // Add other utilities you want to use with 'high-contrast:'
+    },
+  },
   plugins: [
     require('daisyui'),
   ],

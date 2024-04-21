@@ -2,26 +2,24 @@ import {HelmetProvider} from "react-helmet-async";
 import {AuthProvider} from "~/components/home/UserContext";
 import Main from "~/components/Main";
 import React, { createContext, useState, useEffect } from 'react';
+import 'index.css'
 
 export const ThemeContext = createContext<any>(null);
 
 export const App = () => {
-  const [theme, setTheme] = useState('light');
+  const themes = ['light', 'dark', 'pastel', 'monochrome'];
+  const [theme, setTheme] = useState(themes[0]);
 
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark', 'invert');
-    } else {
-      document.documentElement.classList.remove('dark', 'invert');
-    }
+    // Remove all theme classes
+    document.documentElement.classList.remove(...themes);
+
+    // Add the selected theme class
+    document.documentElement.classList.add(theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
-  };
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       <HelmetProvider>
         <AuthProvider>
           <Main />

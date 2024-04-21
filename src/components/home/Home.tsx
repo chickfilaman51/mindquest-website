@@ -25,9 +25,7 @@ function Home() {
                 A new type of math learning for autistic students to grow
               </p>
               <PlacementButton/>
-              <button onClick={toggleTheme} className="btn bg-blue-500 hover:bg-blue-700 normal-case text-white my-4 font-bold">
-                Toggle Theme
-              </button>
+
             </div>
           </div>
         </div>

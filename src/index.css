@@ -15,3 +15,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* styles.css */
+/* index.css */
+.light {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #4f46e5;
+  --secondary-color: #22d3ee;
+}
+
+.dark {
+  --bg-color: #1f2937;
+  --text-color: #f5f5f5;
+  --primary-color: #2563eb;
+  --secondary-color: #059669;
+}
+
+.pastel {
+  /* Define the pastel theme colors here */
+  --bg-color: #f8f0fb;
+  --text-color: #6c757d;
+  --primary-color: #d6a2e8;
+  --secondary-color: #bde0fe;
+}
+
+.monochrome {
+  /* Define the monochrome theme colors here */
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #808080;
+  --secondary-color: #c0c0c0;
+}
