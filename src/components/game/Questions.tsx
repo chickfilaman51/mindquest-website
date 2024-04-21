@@ -295,6 +295,7 @@ const Questions = () => {
       </form>
       <p>{message}</p>
       <p>You have answered {correctCount} questions correctly in a row.</p>
+      <p>Get 5 questions in a row to complete this lesson.</p>
       {correctCount >= 5 && (
         <div className='text-green-500 font-bold mt-9 flex flex-col items-center justify-center'>
           <p>You have completed the lesson! Congratulations!</p>
