@@ -7,7 +7,7 @@ import 'index.css'
 export const ThemeContext = createContext<any>(null);
 
 export const App = () => {
-  const themes = ['light', 'dark', 'pastel', 'monochrome'];
+  const themes = ['light', 'dark', 'high-contrast'];
   const [theme, setTheme] = useState(themes[0]);
 
   useEffect(() => {
@@ -15,7 +15,11 @@ export const App = () => {
     document.documentElement.classList.remove(...themes);
 
     // Add the selected theme class
-    document.documentElement.classList.add(theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.add(theme);
+    }
   }, [theme]);
 
   return (

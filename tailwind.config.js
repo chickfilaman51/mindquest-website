@@ -1,6 +1,6 @@
-
 module.exports = {
   mode: 'jit',
+  darkMode: 'class', // Add this line
   purge: {
     enabled: process.env.NODE_ENV === 'production',
     safeList: [],
@@ -18,13 +18,11 @@ module.exports = {
       '160': '40rem',
       '200': '50rem',
     }
-    
   },
   variants: {
     extend: {
-      backgroundColor: ['high-contrast'],
-      textColor: ['high-contrast'],
-      // Add other utilities you want to use with 'high-contrast:'
+      backgroundColor: "blue", // Change 'high-contrast' to 'dark'
+      textColor: ['dark'], // Change 'high-contrast' to 'dark'
     },
   },
   plugins: [

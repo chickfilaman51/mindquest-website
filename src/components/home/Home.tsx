@@ -13,15 +13,15 @@ function Home() {
     <>
       <Head title="TOP PAGE" />
       {/* Adjusted layout to include the sign-in button at the top right */}
-      <div className={`flex flex-col min-h-screen ${theme === 'dark' ? 'invert' : ''}`}>
+      <div className="flex flex-col min-h-screen bg-white dark:bg-black high-contrast:bg-black high-contrast:text-white">
         
         <div className="flex-grow hero">
           <div className="text-center hero-content">
             <div>
-              <h1 className="text-[15vh] font-bold leading-none">
+              <h1 className="text-[15vh] font-bold leading-none text-black dark:text-white high-contrast:text-white">
                 Mindquest
               </h1>
-              <p className="mt-4 mb-5 text-lg">
+              <p className="mt-4 mb-5 text-lg text-black dark:text-white high-contrast:text-white">
                 A new type of math learning for autistic students to grow
               </p>
               <PlacementButton/>
@@ -35,5 +35,4 @@ function Home() {
     </>
   );
 }
-
 export default Home;
