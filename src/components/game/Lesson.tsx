@@ -4,11 +4,12 @@ import { gradeLessons } from '~/constants';
 import { grade } from '../placement/PlacementResults';
 // Import Link from react-router-dom
 import { Link } from 'react-router-dom';
-
+import { lessonVideos } from '~/constants';
 
 
 
 const Lesson = () => {
+  console.log(lessonVideos[grade][lessonIndex]);
   return (
     <div className="flex flex-col items-center justify-center h-screen">
         <h1 className="text-3xl font-bold mb-4">{gradeLessons[grade][lessonIndex]}</h1>
@@ -16,7 +17,7 @@ const Lesson = () => {
             <iframe
             width="100%"
             height="100%"
-            src="https://www.youtube.com/embed/z_Xjxqk8E4g"
+            src={lessonVideos[grade][lessonIndex]}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

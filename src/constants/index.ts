@@ -219,4 +219,40 @@ export const gradeLessons: { [key: number]: string[] } = {
   ]
 };
 
-
+export const lessonVideos: { [key: number]: string[] } = {
+  2: [
+    "https://www.youtube.com/embed/maACPjY5Gro?si=qeEPAD1M3lpTyyRB",
+    "https://www.youtube.com/embed/gN2a-Da2t3M?si=8LKjSJA3KdyD6MGO",
+    "https://www.youtube.com/embed/ysNaJdYZPjI?si=IDwYgDnSzHNgv5Ad",
+    "https://www.youtube.com/embed/BMp2i4NddwI?si=1D0f4hIzDM3yQl99",
+    "https://www.youtube.com/embed/iTdTFhxIyX4?si=Bjwi0WsUjMkngFXx"
+  ],
+  3: [
+    "https://www.youtube.com/embed/_8FkuVkCoL4?si=fxeFJQT9brfd9MZW",
+    "https://www.youtube.com/embed/BMp2i4NddwI?si=c9Urtee5USzttoVl",
+    "https://www.youtube.com/embed/BMp2i4NddwI?si=1D0f4hIzDM3yQl99",
+    "https://www.youtube.com/embed/9Dc-9fRkO6w?si=K7JnxkCuUyZQEltT",
+    "https://www.youtube.com/embed/QOjTJAFyNrU?si=vUBLPsMrHSnhpBzq"
+  ],
+  4: [
+    "https://www.youtube.com/embed/dUCeKANK-j8?si=vE0ScmBVWkiboZzg",
+    "https://www.youtube.com/embed/jUTfKh_e6kg?si=BCJpnSSakFcY3IPl",
+    "https://www.youtube.com/embed/l2qx39B03k0?si=haDgcRAwOsT8CjLP",
+    "https://www.youtube.com/embed/BMp2i4NddwI?si=1D0f4hIzDM3yQl99",
+    "https://www.youtube.com/embed/8b5eQHtSICk?si=QWQsYA2Gm4KXWZum"
+  ],
+  5: [
+    "https://www.youtube.com/embed/BXByO-lckEA?si=4rD97ym2wSIrvq6Y",
+    "https://www.youtube.com/embed/fZtQ0eTWDs0?si=j5NlMe1_kJljWNG-",
+    "https://www.youtube.com/embed/l2qx39B03k0?si=4pj8xqP4LHnQP5fK",
+    "https://www.youtube.com/embed/9edsdHldUGA?si=okgIuDzcnH8DaIXK",
+    "https://www.youtube.com/embed/OQBHQTSbAqU?si=vvVtHU5MWTFkXpki"
+  ],
+  6: [
+    "https://www.youtube.com/embed/GkTAALpUuf8?si=Uzkui2YtmL98t7U8",
+    "https://www.youtube.com/embed/BXByO-lckEA?si=4rD97ym2wSIrvq6Y",
+    "https://www.youtube.com/embed/l2qx39B03k0?si=4pj8xqP4LHnQP5fK",
+    "https://www.youtube.com/embed/xLc5DsFPiO8?si=Bwsgt4w69dtq1TKn",
+    "https://www.youtube.com/embed/OQBHQTSbAqU?si=vvVtHU5MWTFkXpki"
+  ]
+};
