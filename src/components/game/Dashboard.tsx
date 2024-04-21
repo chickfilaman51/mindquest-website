@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { line, curveCardinal } from 'd3';
 import { grade } from '~/components/placement/PlacementResults';
 import { gradeLessons } from '~/constants';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-
+import { Link,useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
+import { passed } from './TestResults'; // Import passed from TestResults
 let lessonIndex = 1;
 
 const Dashboard = () => {
@@ -31,12 +31,12 @@ const Dashboard = () => {
   const currentGradeLessons = gradeLessons[grade];
 
   const allLessonsCompleted = JSON.parse(localStorage.getItem('completedLessons') || '[]').length === currentGradeLessons.length;
-
+  const navigate = useNavigate();
   const handleTestClick = () => {
-    if (!allLessonsCompleted) {
+    if (!allLessonsCompleted)  {
       alert('You cannot do the final test without completing the lessons first!');
     } else {
-      alert('You clicked the Test Out button');
+      navigate('/test');
     }
   };
 
@@ -86,8 +86,13 @@ const Dashboard = () => {
       {/* Code for displaying Test Out button */}
       <div className="absolute top-0 left-0 right-0 flex justify-center items-center h-24 px-2 mx-auto mt-6 w-1/3 bg-white shadow-md">
         <span className="text-lg font-bold mx-4">Start the <b>Final</b> Test: </span>
-        <button onClick={handleTestClick} className={`px-4 py-2 text-white rounded ${allLessonsCompleted ? 'bg-blue-500' : 'bg-gray-500'}`} >Start</button>
+        <button onClick={handleTestClick} className={`px-4 py-2 text-white rounded ${passed ? 'bg-green-500' : allLessonsCompleted ? 'bg-blue-500' : 'bg-gray-500'}`} >Start</button>
       </div>
+      {passed && (
+        <div className="absolute top-0 left-0 right-0 flex justify-center items-center h-24 px-2 mx-auto mt-6 w-1/3 bg-green-500 text-white shadow-md">
+        <span className="text-lg font-bold">You are finished with this grade</span>
+        </div>
+      )}
     </div>
   );
 };

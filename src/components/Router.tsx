@@ -19,6 +19,8 @@ const PlacementResults = lazy(() => import('~/components/placement/PlacementResu
 const Dashboard = lazy(() => import('~/components/game/Dashboard'));
 const Lesson = lazy(() => import('~/components/game/Lesson'));
 const Questions = lazy(() => import('~/components/game/Questions'));
+const TestOut = lazy(() => import('~/components/game/Test'));
+const TestResults = lazy(() => import('~/components/game/TestResults'));
 function Layout() {
   const { state } = useAuthState();
   // Explicitly define the state type to include User or null
@@ -100,6 +102,15 @@ const InnerRouter = () => {
           path: '/questions',
           element: <Questions />,
         },
+        {
+          path: '/test',
+          element: <TestOut />,
+        },
+        {
+          path: '/testresults',
+          element: <TestResults />,
+        },
+        
       ],
     },
   ];
