@@ -1,6 +1,8 @@
-# My Website
+# Mindquest
 
-This is a brief description of your website.
+By Team 734, Mighty Coders
+
+Mindquest is a math game for students with learning disabilities (like autism) that limit their ability to effectively study math. It has various lessons and questions to allow accessibility for all with easy to navigate features and more! 
 
 ## File Structure
 
