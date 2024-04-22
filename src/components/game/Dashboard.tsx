@@ -39,7 +39,8 @@ const Dashboard = () => {
       navigate('/test');
     }
   };
-
+  const completedLessons = JSON.parse(localStorage.getItem('completedLessons') || '[]');
+  const percentCompleted = Math.round((completedLessons.length / currentGradeLessons.length) * 100);
 
   return (
     <div className="relative">
@@ -53,7 +54,7 @@ const Dashboard = () => {
       {/* Code for displaying percentage completed */}
       <div className="absolute top-0 right-10 flex flex-col items-end mr-8 mt-6">
         <div className="bg-white p-4 shadow-md">
-          <span className="text-lg font-bold cursor-pointer mb-2">Percent completed: 0%</span>
+          <span className="text-lg font-bold cursor-pointer mb-2">Percent Completed: {percentCompleted}%</span>
         </div>
       </div>
 
