@@ -1,5 +1,7 @@
 import React, { useState, Dispatch, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../App';
+import { useContext } from 'react';
 
 // @ts-ignore
 import { questions } from '~/constants/index.ts';
@@ -7,7 +9,7 @@ import { questions } from '~/constants/index.ts';
 
 const PlacementTest = ({ selectedAnswers, setSelectedAnswers }: { selectedAnswers: any, setSelectedAnswers: Dispatch<SetStateAction<any>> }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const handleAnswer = (answerIndex: number) => {
     setSelectedAnswers((prev: Record<string, any>) => ({ ...prev, [currentQuestionIndex]: answerIndex }));
@@ -28,9 +30,9 @@ const PlacementTest = ({ selectedAnswers, setSelectedAnswers }: { selectedAnswer
 
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <h2 className="text-2xl font-bold mb-4">{`Question ${currentQuestionIndex + 1}:`} <br /></h2>
-      <h2 className="text-2xl font-bold mb-4">{questions[currentQuestionIndex].question}</h2>
+    <div className="flex flex-col justify-center items-center h-screen bg-white dark:bg-black high-contrast:bg-black high-contrast:text-white">
+      <h2 className="text-2xl font-bold mb-4 text-black dark:text-white high-contrast:text-white">{`Question ${currentQuestionIndex + 1}:`} <br /></h2>
+      <h2 className="text-2xl font-bold mb-4 text-black dark:text-white high-contrast:text-white">{questions[currentQuestionIndex].question}</h2>
       
       <div>
         {Object.entries(questions[currentQuestionIndex]).slice(1, 5).map(([key, value], index) => {

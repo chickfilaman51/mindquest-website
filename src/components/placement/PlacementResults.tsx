@@ -27,11 +27,11 @@ const PlacementResults = ({ selectedAnswers }: { selectedAnswers: any }) => {
   });
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <h2 className="text-8xl font-bold my-4  ">Results</h2>
-      <p className="text-2xl">Correct: {results['correct']}</p>
-      <p className="text-2xl">Incorrect: {results['incorrect']}</p>
-      <p className="text-2xl">You are in grade {grade}!</p>
+    <div className="flex flex-col justify-center items-center h-screen bg-white dark:bg-black high-contrast:bg-black high-contrast:text-white">
+      <h2 className="text-black dark:text-white high-contrast:text-white text-8xl font-bold my-4  ">Results</h2>
+      <p className="text-black dark:text-white high-contrast:text-white text-2xl">Correct: {results['correct']}</p>
+      <p className="text-black dark:text-white high-contrast:text-white text-2xl">Incorrect: {results['incorrect']}</p>
+      <p className="text-black dark:text-white high-contrast:text-white text-2xl">You are in grade {grade}!</p>
       <LearningButton />
     </div>
   );

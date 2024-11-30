@@ -43,9 +43,9 @@ const Dashboard = () => {
   const percentCompleted = Math.round((completedLessons.length / currentGradeLessons.length) * 100);
 
   return (
-    <div className="relative">
+    <div className="relative bg-white dark:bg-black high-contrast:bg-black high-contrast:text-white">
       {/* Code for displaying grade level */}
-      <div className="absolute top-0 left-10 flex flex-col items-end mr-8 mt-6">
+      <div className="absolute top-0 left-10 flex flex-col items-end mr-8 mt-6 ">
         <div className="bg-white p-4 shadow-md">
           <span className="text-lg font-bold cursor-pointer mb-2">Grade Level: {grade}</span>
         </div>
