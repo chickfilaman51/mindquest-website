@@ -64,7 +64,11 @@ const PlacementTest = ({ selectedAnswers, setSelectedAnswers }: { selectedAnswer
       <Link to="/placementresults" className="btn bg-blue-500 hover:bg-blue-700 normal-case text-white my-4 font-bold">
         Submit
       </Link>
+      
     </div>
+    
+
+
   );
   
 };

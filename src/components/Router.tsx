@@ -53,7 +53,6 @@ function Layout() {
           <select value={theme} onChange={(e) => setTheme(e.target.value)} className="ml-2 bg-blue-500 text-white rounded px-4 py-2">
             <option value="light">Light</option>
             <option value="dark">Dark</option>
-            <option value="high-contrast">High Contrast</option>
           </select>
         </div>
       </nav>

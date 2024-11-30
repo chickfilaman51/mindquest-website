@@ -5,7 +5,8 @@ import * as questions from '~/constants/questions';
 import { useNavigate } from 'react-router-dom';
 import { gradeTopicFunctionMap } from './Questions';
 import { Link } from 'react-router-dom';
-
+import { ThemeContext } from '../App';
+import { useContext } from 'react';
 
 var correct = 0;
 
@@ -15,6 +16,7 @@ const TestComponent = () => {
   const [testQuestions, setTestQuestions] = useState<any[]>([]);
   const navigate = useNavigate();
   const [correctAnswers, setCorrectAnswers] = useState(0);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   useEffect(() => {
     const gradeTopics = gradeLessons[grade];
@@ -62,7 +64,7 @@ const TestComponent = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen bg-white dark:bg-black high-contrast:bg-black high-contrast:text-white">
       <h2 className="text-2xl font-bold mb-4">{currentQuestion ? `Question ${currentQuestionIndex + 1}:` : 'Loading...'} <br /></h2>
       <h2 className="text-2xl font-bold mb-4">{currentQuestion ? currentQuestion.question : 'Loading...'}</h2>
       

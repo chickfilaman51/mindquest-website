@@ -7,7 +7,7 @@ import 'index.css'
 export const ThemeContext = createContext<any>(null);
 
 export const App = () => {
-  const themes = ['light', 'dark', 'high-contrast'];
+  const themes = ['light', 'dark'];
   const [theme, setTheme] = useState(themes[0]);
 
   useEffect(() => {
